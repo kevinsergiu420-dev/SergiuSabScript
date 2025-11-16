@@ -1,0 +1,125 @@
+-- SergiuuFish GUI for Roblox (Dark Mode, Draggable, Minimizable, Closable)
+-- Place this LocalScript inside StarterPlayerScripts or StarterGui
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SergiuuFishGUI"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Main Window
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 400, 0, 250)
+Main.Position = UDim2.new(0, 200, 0, 150)
+Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Main.BorderSizePixel = 0
+Main.Active = true
+Main.Draggable = true  -- Allows dragging
+Main.Parent = ScreenGui
+
+-- Header Bar
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 30)
+Header.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Header.BorderSizePixel = 0
+Header.Parent = Main
+
+-- Title Text
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -90, 1, 0)
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Font = Enum.Font.GothamBold
+Title.Text = "SergiuuFish"
+Title.TextSize = 18
+Title.TextColor3 = Color3.fromRGB(220, 220, 220)
+Title.Parent = Header
+
+-- Minimize Button
+local MinBtn = Instance.new("TextButton")
+MinBtn.Size = UDim2.new(0, 30, 1, 0)
+MinBtn.Position = UDim2.new(1, -60, 0, 0)
+MinBtn.Text = "–"
+MinBtn.Font = Enum.Font.GothamBold
+MinBtn.TextSize = 20
+MinBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+MinBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+MinBtn.Parent = Header
+
+-- Close Button
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 30, 1, 0)
+CloseBtn.Position = UDim2.new(1, -30, 0, 0)
+CloseBtn.Text = "X"
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 18
+CloseBtn.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+CloseBtn.TextColor3 = Color3.fromRGB(255, 180, 180)
+CloseBtn.Parent = Header
+
+-- Content Frame
+local Body = Instance.new("Frame")
+Body.Size = UDim2.new(1, 0, 1, -30)
+Body.Position = UDim2.new(0, 0, 0, 30)
+Body.BackgroundTransparency = 1
+Body.Parent = Main
+
+-- Start Fishing Button (does nothing)
+local StartBtn = Instance.new("TextButton")
+StartBtn.Size = UDim2.new(0, 200, 0, 50)
+StartBtn.Position = UDim2.new(0.5, -100, 0.2, 0)
+StartBtn.Text = "Start Fishing"
+StartBtn.Font = Enum.Font.GothamBold
+StartBtn.TextSize = 20
+StartBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 180)
+StartBtn.TextColor3 = Color3.fromRGB(240, 240, 240)
+StartBtn.AutoButtonColor = false  -- Disabled look
+StartBtn.Parent = Body
+
+-- Minimized State Frame
+local Minimized = Instance.new("Frame")
+Minimized.Size = UDim2.new(0, 180, 0, 35)
+Minimized.Position = UDim2.new(0, 200, 0, 150)
+Minimized.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Minimized.Visible = false
+Minimized.Active = true
+Minimized.Draggable = true
+Minimized.Parent = ScreenGui
+
+local MinText = Instance.new("TextLabel")
+MinText.Size = UDim2.new(1, -40, 1, 0)
+MinText.BackgroundTransparency = 1
+MinText.Font = Enum.Font.Gotham
+MinText.Text = "SergiuuFish"
+MinText.TextSize = 16
+MinText.TextColor3 = Color3.fromRGB(220, 220, 220)
+MinText.Position = UDim2.new(0, 8, 0, 0)
+MinText.Parent = Minimized
+
+local RestoreBtn = Instance.new("TextButton")
+RestoreBtn.Size = UDim2.new(0, 35, 1, 0)
+RestoreBtn.Position = UDim2.new(1, -35, 0, 0)
+RestoreBtn.Text = "▢"
+RestoreBtn.Font = Enum.Font.GothamBold
+RestoreBtn.TextSize = 22
+RestoreBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+RestoreBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+RestoreBtn.Parent = Minimized
+
+-- Button Logic
+MinBtn.MouseButton1Click:Connect(function()
+    Main.Visible = false
+    Minimized.Visible = true
+end)
+
+CloseBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+RestoreBtn.MouseButton1Click:Connect(function()
+    Main.Visible = true
+    Minimized.Visible = false
+end)
+
+-- StartBtn does nothing on purpose
+StartBtn.MouseButton1Click:Connect(function()
+    -- intentionally left empty
+end)
